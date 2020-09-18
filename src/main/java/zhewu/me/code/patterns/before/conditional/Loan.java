@@ -7,26 +7,26 @@ import java.util.List;
 
 public class Loan {
     public static final double NORMAL_UNUSED_PERCENTAGE = 1.0;
-    private static Double MILLIS_PER_DAY = 86400000D;
-    private static Double DAYS_PER_YEAR = 365D;
+    private static double MILLIS_PER_DAY = 86400000D;
+    private static double DAYS_PER_YEAR = 365D;
 
-    private Double commitment;
+    private double commitment;
     private LocalDateTime expiry;
     private LocalDateTime maturity;
-    private Double outstanding;
+    private double outstanding;
     private List<Payment> payments = new ArrayList<>();
     private LocalDateTime today;
     private LocalDateTime start;
-    private Double riskRating;
-    private Double unusedPercentage;
-    private Double shouldBeRemoved;
+    private double riskRating;
+    private double unusedPercentage;
+    private double shouldBeRemoved;
 
-    public Loan(Double commitment,
-                Double status,
+    public Loan(double commitment,
+                double status,
                 LocalDateTime expiry,
                 LocalDateTime maturity,
                 LocalDateTime start,
-                Double riskRating) {
+                double riskRating) {
         this.commitment = commitment;
         this.expiry = expiry;
         this.maturity = maturity;
@@ -36,12 +36,12 @@ public class Loan {
         this.unusedPercentage = 1.0;
     }
 
-    public void addPayment(Double amount, LocalDateTime paymentDate) {
+    public void addPayment(double amount, LocalDateTime paymentDate) {
         payments.add(new Payment(amount, paymentDate));
     }
 
 
-    public Double duration() {
+    public double duration() {
         if (expiry == null && maturity != null) {
             return getWeightedAverageDuration();
         } else if (expiry != null && maturity == null) {
@@ -50,7 +50,7 @@ public class Loan {
         return 0D;
     }
 
-    public Double capital() {
+    public double capital() {
         double result = 0D;
         if (expiry == null && maturity != null) {
             result = commitment * duration() * getRiskFactor();
@@ -65,11 +65,11 @@ public class Loan {
         return result;
     }
 
-    public void setUnusedPercentage(Double unusedPercentage) {
+    public void setUnusedPercentage(double unusedPercentage) {
         this.unusedPercentage = unusedPercentage;
     }
 
-    public Double getUnusedPercentage() {
+    public double getUnusedPercentage() {
         return unusedPercentage;
     }
 
@@ -77,24 +77,24 @@ public class Loan {
         this.today = today;
     }
 
-    public void setOutstanding(Double outstanding) {
+    public void setOutstanding(double outstanding) {
         this.outstanding = outstanding;
     }
 
-    private Double getRiskFactor() {
+    private double getRiskFactor() {
         return RiskFactor.getInstance().forRating(riskRating);
     }
 
-    private Double getUnusedRiskFactor() {
+    private double getUnusedRiskFactor() {
         return UnusedRiskFactor.getInstance().forRating(riskRating);
     }
 
-    private Double yearsTo(LocalDateTime end) {
+    private double yearsTo(LocalDateTime end) {
         LocalDateTime begin = (today == null) ? start : start;
         return (getMillSeconds(end) - getMillSeconds(begin)) / MILLIS_PER_DAY / DAYS_PER_YEAR;
     }
 
-    private Double getWeightedAverageDuration() {
+    private double getWeightedAverageDuration() {
         double duration = 0D;
         double weightedAverage = 0D;
         double sumOfPayments = 0D;
@@ -111,11 +111,11 @@ public class Loan {
         return duration;
     }
 
-    private Double getMillSeconds(LocalDateTime date) {
+    private double getMillSeconds(LocalDateTime date) {
         return (double) date.atZone(ZoneId.of("Asia/Shanghai")).toInstant().toEpochMilli();
     }
 
-    private Double getUnusedRiskAmount() {
+    private double getUnusedRiskAmount() {
         return commitment - outstanding;
     }
 }

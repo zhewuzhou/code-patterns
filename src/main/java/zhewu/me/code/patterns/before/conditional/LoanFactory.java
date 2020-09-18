@@ -7,7 +7,7 @@ public class LoanFactory {
     public static Loan createTermLoan(double commitment,
                                       LocalDateTime start,
                                       LocalDateTime maturity,
-                                      Double riskRating) {
+                                      double riskRating) {
         return new LoanBuilder()
             .withCommitment(commitment)
             .withStatus(commitment)
@@ -20,7 +20,7 @@ public class LoanFactory {
     public static Loan createResolver(double commitment,
                                       LocalDateTime start,
                                       LocalDateTime expiry,
-                                      Double riskRating
+                                      double riskRating
     ) {
         return new LoanBuilder()
             .withCommitment(commitment)
@@ -31,10 +31,10 @@ public class LoanFactory {
             .build();
     }
 
-    public static Loan createAdvisedLine(Double commitment,
+    public static Loan createAdvisedLine(double commitment,
                                          LocalDateTime start,
                                          LocalDateTime expiry,
-                                         Double riskRating) {
+                                         double riskRating) {
         if (riskRating > 3) return null;
         Loan loan = new LoanBuilder()
             .withCommitment(commitment)

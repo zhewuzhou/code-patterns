@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.closeTo;
+import static zhewu.me.code.patterns.before.conditional.LoanFactory.createTermLoan;
 
 class LoanTest {
 
@@ -19,7 +20,7 @@ class LoanTest {
 
     @Test
     void capitalShouldWorksForTermLoan() {
-        Loan termLoan = LoanFactory.createTermLoan(COMMITMENT, START, MATURITY, RISK_RATING);
+        Loan termLoan = createTermLoan(COMMITMENT, START, MATURITY, RISK_RATING);
         ArrayList<Payment> payments = createPayments();
         for (int i = 0; i < 12; i++) {
             termLoan.addPayment(payments.get(i).getAmount(), payments.get(i).getDate());
