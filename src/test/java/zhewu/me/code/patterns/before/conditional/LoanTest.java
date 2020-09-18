@@ -19,7 +19,7 @@ class LoanTest {
 
     @Test
     void capitalShouldWorksForTermLoan() {
-        Loan termLoan = Loan.createTermLoan(COMMITMENT, START, MATURITY, RISK_RATING);
+        Loan termLoan = LoanFactory.createTermLoan(COMMITMENT, START, MATURITY, RISK_RATING);
         ArrayList<Payment> payments = createPayments();
         for (int i = 0; i < 12; i++) {
             termLoan.addPayment(payments.get(i).getAmount(), payments.get(i).getDate());
