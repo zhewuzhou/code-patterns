@@ -23,9 +23,11 @@ dependencies {
 
     // This dependency is used internally, and not exposed to consumers on their own compile classpath.
     implementation("com.google.guava:guava:29.0-jre")
+    implementation("org.jetbrains:annotations:19.0.0")
 
     // Use JUnit Jupiter API for testing.
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.6.2")
+    testImplementation("org.hamcrest:hamcrest-all:1.3")
 
     // Use JUnit Jupiter Engine for testing.
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.6.2")
