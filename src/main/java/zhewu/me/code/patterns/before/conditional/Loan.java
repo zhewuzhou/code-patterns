@@ -22,7 +22,7 @@ public class Loan {
     private double shouldBeRemoved;
 
     public Loan(double commitment,
-                double status,
+                double shouldBeRemoved,
                 LocalDateTime expiry,
                 LocalDateTime maturity,
                 LocalDateTime start,
@@ -32,7 +32,7 @@ public class Loan {
         this.maturity = maturity;
         this.start = start;
         this.riskRating = riskRating;
-        this.shouldBeRemoved = status;
+        this.shouldBeRemoved = shouldBeRemoved;
         this.unusedPercentage = 1.0;
     }
 

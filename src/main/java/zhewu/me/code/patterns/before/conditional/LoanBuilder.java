@@ -3,14 +3,14 @@ package zhewu.me.code.patterns.before.conditional;
 import java.time.LocalDateTime;
 
 public class LoanBuilder {
-    private Double commitment;
+    private double commitment;
     private LocalDateTime expiry;
     private LocalDateTime maturity;
     private LocalDateTime start;
-    private Double riskRating;
-    private Double status;
+    private double riskRating;
+    private double shouldBeRemoved;
 
-    public LoanBuilder withCommitment(Double commitment) {
+    public LoanBuilder withCommitment(double commitment) {
         this.commitment = commitment;
         return this;
     }
@@ -30,18 +30,18 @@ public class LoanBuilder {
         return this;
     }
 
-    public LoanBuilder withRiskRating(Double riskRating) {
+    public LoanBuilder withRiskRating(double riskRating) {
         this.riskRating = riskRating;
         return this;
     }
 
-    public LoanBuilder withStatus(Double status) {
-        this.status = status;
+    public LoanBuilder withStatus(double status) {
+        this.shouldBeRemoved = status;
         return this;
     }
 
     public Loan build() {
-        return new Loan(commitment, status, expiry, maturity, start, riskRating);
+        return new Loan(commitment, shouldBeRemoved, expiry, maturity, start, riskRating);
     }
 
 }
